@@ -16,7 +16,7 @@
           [(eq? (syntax->datum maybe-kw) '#:name)
            (define maybe-name (read-syntax src in))
            (cond
-             [(eof-object? maybe-name) (raise-syntax-error 'jsond "expected name before eof" maybe-name)]
+             [(eof-object? maybe-name) (raise-syntax-error 'jsond "expected name before eof" maybe-kw)]
              [(symbol? (syntax->datum maybe-name))
               (define json-value (read-json in))
               (cond
