@@ -18,8 +18,11 @@
            (cond
              [(eof-object? maybe-name) (raise-syntax-error 'jsond "expected name before eof" maybe-name)]
              [(symbol? (syntax->datum maybe-name))
-              (loop (cons maybe-name names)
-                    (cons `',(read-json in) jsons))]
+              (define json-value (read-json in))
+              (cond
+                [(eof-object? json-value) (raise-syntax-error 'jsond "expected JSON value before eof" maybe-name)]
+                [else (loop (cons maybe-name names)
+                            (cons `',json-value jsons))])]
              [else (raise-syntax-error 'jsond "expected name" maybe-name)])]
           [else (raise-syntax-error 'jsond "expected keyword #:name" maybe-kw)])))
     (strip-context
