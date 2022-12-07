@@ -7,3 +7,4 @@
 (define version "0.1")
 (define pkg-authors '(benknoble))
 (define compile-omit-paths '("examples"))
+(define license 'MIT)
